@@ -1,0 +1,66 @@
+
+
+
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText android:id="@+id/spacelgt"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/spacelgt"
+            android:inputType="number"/>
+
+        <EditText android:id="@+id/distance"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/distance"
+            android:inputType="number"/>
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal"
+            android:layout_marginRight="20dp"
+           >
+
+        <Button
+            android:id="@+id/btnFind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_send"
+            android:onClick="sendMessage"
+            android:background="@drawable/btnbg"
+
+            style="@style/ButtonText"
+            />
+
+         </LinearLayout>
+
+
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            style="@style/settings_plain_text"
+            >
+
+        </ListView>
+
+
+
+
+    </LinearLayout>
+
+
