@@ -110,7 +110,7 @@ public class MainActivity extends FragmentActivity implements
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         // Set the update interval to 20 seconds
         mLocationRequest.setInterval(1000 * 20);
-        // Set the fastest update interval to 1 second
+        // Set the fastest update interval to 10 seconds
         mLocationRequest.setFastestInterval(10000);
 
 
