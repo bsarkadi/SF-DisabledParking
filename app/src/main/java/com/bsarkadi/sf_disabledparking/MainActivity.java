@@ -9,8 +9,6 @@ package com.bsarkadi.sf_disabledparking;
  * The needed space length for your car and the max distance should be set for a search.
  * Results are sorted by distance. Click the links in the list items and Google Maps opens
  * with a marker at the coordinates.
- * For the online demo, fixed coordinates are used, which should be changed for production.
- * (lattest/lngtest to yourLat/yourLng
  *
  * Dataset used for project: Disabled Parking
  *
@@ -251,15 +249,12 @@ public class MainActivity extends FragmentActivity implements
 
         final int lspace = space;
 
-        //CHANGE THESE to Your Coords (yourLat,yourLng) for production!!!!!!
-        final double lattest = 37.7891192076677;
-        final double lngtest = -122.395881039335;
 
 
 
-        //CHANGE lattest, lngtest to yourLat,yourLng in production!
+
         //Create URL for SODA SoQL query
-        String urlSODAQuery =  "http://data.sfgov.org/resource/wc6f-brai.json?$where=within_circle(location,%20" + Double.toString(lattest) +",%20" + Double.toString(lngtest) +",%20" + radius +")";
+        String urlSODAQuery =  "http://data.sfgov.org/resource/wc6f-brai.json?$where=within_circle(location,%20" + Double.toString(yourLat) +",%20" + Double.toString(yourLng) +",%20" + radius +")";
 
 
         //Make SODA query to get JSON Array
@@ -314,7 +309,7 @@ public class MainActivity extends FragmentActivity implements
                                  }
 
 
-                                //CHANGE lattest, lngtest to yourLat,yourLng in production!
+
                                 //Get distance from truck
                                 if (lat2!= 0 && lng2 != 0){
                                   dist = distFrom(yourLat,yourLng,lat2,lng2);}
