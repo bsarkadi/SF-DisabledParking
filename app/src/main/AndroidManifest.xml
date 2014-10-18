@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-            android:name="com.bsarkadi.sf_disabledparking.MyListActivity"
+            android:name=".MyFragment"
             android:label="@string/title_listactivity_message"
             android:parentActivityName=".MainActivity" >
             <meta-data

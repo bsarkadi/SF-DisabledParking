@@ -15,8 +15,9 @@ package com.bsarkadi.sf_disabledparking;
  */
 
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -70,7 +71,6 @@ public class MainActivity extends FragmentActivity implements
 
 
 
-
     //Declare variables for your coordinates
     double yourLat =0, yourLng=0;
 
@@ -114,12 +114,16 @@ public class MainActivity extends FragmentActivity implements
         mLocationRequest.setFastestInterval(10000);
 
 
+
+
         //Set listener for Find button
         btnFind.setOnClickListener(new View.OnClickListener() {
 
 
             @Override
             public void onClick(View v) {
+
+
 
                 EditText spacelength = (EditText) findViewById(R.id.spacelgt);
                 String space = spacelength.getText().toString();
@@ -147,6 +151,9 @@ public class MainActivity extends FragmentActivity implements
 
                 // making SODA request
                 makeSODARequest(spaceneeded,radius_mile, flag);
+
+
+
 
             }
 
@@ -246,15 +253,16 @@ public class MainActivity extends FragmentActivity implements
 
 
 
+        //CHANGE THESE to Your Coords (yourLat,yourLng) for production!!!!!!
+        final double lattest = 37.7891192076677;
+        final double lngtest = -122.395881039335;
+
 
         final int lspace = space;
 
 
-
-
-
         //Create URL for SODA SoQL query
-        String urlSODAQuery =  "http://data.sfgov.org/resource/wc6f-brai.json?$where=within_circle(location,%20" + Double.toString(yourLat) +",%20" + Double.toString(yourLng) +",%20" + radius +")";
+        String urlSODAQuery =  "http://data.sfgov.org/resource/wc6f-brai.json?$where=within_circle(location,%20" + Double.toString(lattest) +",%20" + Double.toString(lngtest) +",%20" + radius +")";
 
 
         //Make SODA query to get JSON Array
@@ -321,7 +329,7 @@ public class MainActivity extends FragmentActivity implements
                                 // "<a href=\"" + uri + "\">"
                                 //Create response string
                                 if(spaceleng >= lspace ){
-                                    jsonResponse = "<br/>" + "<a href=\"" + uri + "\">" + address + "</a>" + "<br/>" + locationdesc + "<br/>" + "Distance: " + dist + " miles"+ "<br/>" + "Space length: " + spaceleng+ "<br/>";
+                                    jsonResponse = "<br/>" + "<a href=\"" + uri + "\">" + address + "</a>" + "<br/>" + locationdesc + "<br/>" + "Distance: " + dist + " miles"+ "<br/>" + "Space length: " + spaceleng + " feet"+ "<br/>";
                                 loc_flag = true;
 
                                 //Create result objects in every iteration and put them in an arraylist
@@ -371,12 +379,26 @@ public class MainActivity extends FragmentActivity implements
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
+
+
     }
 
-    public void sendMessage(ArrayList arlist) {
-        Intent intent = new Intent(this, MyListActivity.class);
-        intent.putExtra("array_list", arlist);
-        startActivity(intent);
+
+   public void sendMessage(ArrayList arlist) {
+
+
+       Bundle extras1 = new Bundle();
+       extras1.putParcelableArrayList("arraylist", arlist);
+       MyFragment fg = new MyFragment();
+       fg.setArguments(extras1);
+
+       FragmentManager fragmentManager = getFragmentManager();
+
+       FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+
+       fragmentTransaction.replace(R.id.list, fg);
+       fragmentTransaction.commit();
 
 
     }
